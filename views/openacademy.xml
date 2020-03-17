@@ -37,6 +37,12 @@
             <search>
                 <field name="name"/>
                 <field name="description"/>
+                <field name="my_courses" string="My courses"
+                       domain="[('responsible_id', '=', uid)]"/>
+                <group string="Group By">
+                    <filter name="by_responsible" string="Responsible"
+                            context="{'group_by': 'responsible_id'}"/>
+                </group>
             </search>
         </field>
     </record>
@@ -62,6 +68,7 @@
         <field name="name">Courses</field>
         <field name="res_model">openacademy.course</field>
         <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_my_courses': 1}"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create the first course
             </p>
@@ -138,10 +145,31 @@
     <record model="ir.actions.act_window" id="session_list_action">
         <field name="name">Sessions</field>
         <field name="res_model">openacademy.session</field>
-        <field name="view_mode">tree, form, calendar</field>
+        <field name="view_mode">tree,form,calendar</field>
     </record>
 
     <menuitem id="session_menu" name="Sessions"
               parent="openacademy_menu"
               action="session_list_action"/>
+
+    <record model="ir.ui.view" id="wizard_form_view">
+        <field name="name">wizard.form</field>
+        <field name="model">openacademy.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Attendees">
+                <group>
+                    <field name="session_id"/>
+                    <field name="attendee_ids"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="launch_session_wizard"
+                name="Add Attendees"
+                src_model="openacademy.session"
+                res_model="openacademy.wizard"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"/>
 </odoo>

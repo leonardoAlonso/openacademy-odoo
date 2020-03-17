@@ -3,14 +3,13 @@
     'name': "openacademy",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        My short description v1.3.3""",
 
     'description': """
         Long description of module's purpose
     """,
 
-    'author': "My Company",
+    'author': "Leonardo Alonso",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
@@ -24,6 +23,8 @@
 
     # always loaded
     'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'views/openacademy.xml',
         'views/partner.xml',
     ],
