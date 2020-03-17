@@ -3,10 +3,10 @@
     'name': "openacademy",
 
     'summary': """
-        My short description v1.3.3""",
+        My short description v1.3.4""",
 
     'description': """
-        Long description of module's purpose
+        Add assistant register
     """,
 
     'author': "Leonardo Alonso",

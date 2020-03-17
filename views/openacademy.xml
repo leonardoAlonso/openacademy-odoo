@@ -220,9 +220,15 @@
         <field name="arch" type="xml">
             <form string="Add Attendees">
                 <group>
-                    <field name="session_id"/>
+                    <field name="session_ids"/>
                     <field name="attendee_ids"/>
                 </group>
+                <footer>
+                    <button name="subscribe" type="object"
+                            string="Subscribe" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
             </form>
         </field>
     </record>
