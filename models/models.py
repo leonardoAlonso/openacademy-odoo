@@ -10,7 +10,7 @@ class Course(models.Model):
     name = fields.Char(string="Title")
     description = fields.Text()
 
-    resposible_id = fields.Many2one('res.users', ondelete="set null", index=True)
+    responsible_id = fields.Many2one('res.users', ondelete="set null", index=True)
     session_ids = fields.One2many('openacademy.session', 'course_id', string="Session")
 
     def copy(self, default=None):
@@ -54,7 +54,7 @@ class Session(models.Model):
 
     taken_seats = fields.Float(string="Taken seats", compute="_taken_seats")
 
-    end_date = fields.Date(string="End Date", compute='_get_end_date', inverse="_set_env_date")
+    end_date = fields.Date(string="End Date", compute='_get_end_date', inverse="_set_end_date")
 
     @api.depends('seats', 'attendee_ids')
     def _taken_seats(self):
@@ -88,7 +88,7 @@ class Session(models.Model):
             if r.instructor_id and r.instructor_id in r.attendee_ids:
                 raise exceptions.ValidationError("A session instructor can't be an attendee")
 
-    @api.depends(start_date, duration)
+    @api.depends('start_date', 'duration')
     def _get_end_date(self):
         for r in self:
             if not (r.start_date and r.duration):
