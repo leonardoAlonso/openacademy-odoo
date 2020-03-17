@@ -56,6 +56,8 @@ class Session(models.Model):
 
     end_date = fields.Date(string="End Date", compute='_get_end_date', inverse="_set_end_date")
 
+    attedees_count = fields.Integer(string="Attendees count", compute='_get_attendees_count', store=True)
+
     @api.depends('seats', 'attendee_ids')
     def _taken_seats(self):
         for r in self:
@@ -103,3 +105,8 @@ class Session(models.Model):
                 continue
 
             r.duration = (r.end_date - r.start_date).days + 1
+
+    @api.depends('attendee_ids')
+    def _get_attendees_count(self):
+        for r in self:
+            r.attedees_count = len(r.attendee_ids)
