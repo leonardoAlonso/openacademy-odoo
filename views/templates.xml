@@ -1,22 +1,33 @@
 <odoo>
-    <data>
-        <!-- <template id="listing"> -->
-        <!--   <ul> -->
-        <!--     <li t-foreach="objects" t-as="object"> -->
-        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
-        <!--         <t t-esc="object.display_name"/> -->
-        <!--       </a> -->
-        <!--     </li> -->
-        <!--   </ul> -->
-        <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
-    </data>
+    <template id="index">
+        <t t-call="website.layout">
+            <t t-set="title">Academy</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-foreach="courses" t-as="course">
+                        <p>
+                            <a t-attf-href="/openacademy/{{ slug(course) }}">
+                                <t t-esc="course.name"/>
+                            </a>
+                        </p>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="detail">
+        <t t-call="website.layout">
+            <t t-set="title">Course</t>
+            <div class="oe_structure"/>
+                <div class="oe_structure">
+                    <div class="container">
+                        <h3>
+                            <t t-esc="course.name"/>
+                            <div t-field="course.description"/>
+                        </h3>
+                    </div>
+                </div>
+            <div class="oe_structure"/>
+        </t>
+    </template>
 </odoo>

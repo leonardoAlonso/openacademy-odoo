@@ -3,10 +3,11 @@
     'name': "openacademy",
 
     'summary': """
-        My short description v1.3.4""",
+        My short description v1.3.6""",
 
     'description': """
         Add assistant register
+        Add controllers
     """,
 
     'author': "Leonardo Alonso",
@@ -19,12 +20,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','website'],
 
     # always loaded
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'views/templates.xml',
         'views/openacademy.xml',
         'views/partner.xml',
     ],
